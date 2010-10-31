@@ -1,5 +1,6 @@
 import Qt 4.7
-import "../js/Gowalla.js" as Gowalla;
+import "../js/gowalla.js" as Gowalla;
+import "../js/storage.js" as Storage;
 
 FocusScope {
     id: wrapper
@@ -12,8 +13,9 @@ FocusScope {
         var password = inputPassword.text;
         if (username && password) {
             screen.state = "loggingIn";
+            Storage.setUser(username, password);
             Gowalla.getFriendsActivity(screen.callback, username, password);
-            screen.state = "loggedIn";
+            //screen.state = "loggedIn";
         }
     }
 

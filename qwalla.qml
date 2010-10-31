@@ -1,6 +1,7 @@
 import Qt 4.7
 import "QwallaCore" 1.0 as Qwalla
 import "js/gowalla.js" as Gowalla
+import "js/storage.js" as Storage
 
 Item {
     id: screen; width: 360; height: 640;
@@ -11,26 +12,17 @@ Item {
         for (activity in data.activity) {
             userListView.model.append(data.activity[activity]);
         }
+        screen.state = "loggedIn"
     }
 
     function startApp() {
-        var username;
-        var password;
-        var db = openDatabaseSync("qwalla", "1.0", "Qwalla Database", 1000000);
-        db.transaction(
-            function(tx) {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS User(username TEXT, password TEXT)');
-                var result = tx.executeSql('SELECT username,password FROM User');
-                if (result.rows.length) {
-                    username = result.rows.item(0).username;
-                    password = result.rows.item(0).password;
-                }
-            }
-        )
-        if (!username || !password)  {
+        Storage.initialize();
+        var user = Storage.getUser();
+        if (!user)  {
             screen.state = "login";
         } else {
             screen.state = "loggingIn";
+            Gowalla.getFriendsActivity(screen.callback, user.username, user.password);
         }
     }
 
@@ -48,11 +40,13 @@ Item {
 
             Qwalla.UserListView {
                 id: userListView
+                x: - screen.width
+
             }
 
             Qwalla.LoginView {
                 id: loginView
-                x: - width
+                x: - screen.width
             }
         }
         //Qwalla.Loading { anchors.centerIn: parent; visible: screen.state == "loggingIn" }
