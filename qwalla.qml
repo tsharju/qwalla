@@ -40,8 +40,6 @@ Item {
 
             Qwalla.UserListView {
                 id: userListView
-                x: - screen.width
-
             }
 
             Qwalla.LoginView {
@@ -49,7 +47,7 @@ Item {
                 x: - screen.width
             }
         }
-        //Qwalla.Loading { anchors.centerIn: parent; visible: screen.state == "loggingIn" }
+        Qwalla.Loading { anchors.centerIn: parent; visible: screen.state == "loggingIn" }
         Qwalla.ToolBar { id: toolBar; height: 70 }
 
         Component.onCompleted: startApp()
