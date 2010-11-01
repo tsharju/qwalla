@@ -7,9 +7,11 @@ Component {
     Rectangle {
         id: userListItem
         color: "#eeddcc"
-        width: parent.width
+        width: parent.width - 10
+        anchors.horizontalCenter: parent.horizontalCenter
         height: 93
         radius: 5
+
         Row {
             spacing: 10
             Rectangle {
@@ -46,6 +48,10 @@ Component {
                     }
                 }
             }
+        }
+        ListView.onAdd: SequentialAnimation {
+            PropertyAction { target: userListItem; property: "height"; value: 0 }
+            NumberAnimation { target: userListItem; property: "height"; to: 93; duration: 1000; easing.type: Easing.InOutQuad }
         }
         MouseArea {
             anchors.fill: parent

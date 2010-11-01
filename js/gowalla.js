@@ -13,7 +13,7 @@ function getFriendsActivity(callback, username, password)
 
 function listNearbySpots(callback, lat, lon, radius)
 {
-    var url = "/spots?lat=" + lat + "&lon=" + lon + "&radius=" + radius;
+    var url = "/spots?lat=" + lat + "&lng=" + lon + "&radius=" + radius;
     httpRequest("GET", url, callback);
 }
 

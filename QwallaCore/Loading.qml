@@ -9,11 +9,12 @@ Rectangle {
     height: 150
     radius: 10
     color: "#2e2e2e"
+    opacity: 0.8
     Rectangle {
         width: 0.5 * parent.width
         height: 0.5 * parent.height
         anchors.centerIn: parent
-        color: parent.color
+        color: "transparent"
     Column {
         anchors.fill: parent
         spacing: 10
