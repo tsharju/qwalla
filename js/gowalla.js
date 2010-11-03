@@ -1,3 +1,5 @@
+.pragma library
+
 var API_BASE_URL = "http://api.gowalla.com";
 var API_KEY = "742292fb289449e5a3a32edba8ab1a0c";
 

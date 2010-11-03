@@ -12,9 +12,9 @@ FocusScope {
         var username = inputUsername.text;
         var password = inputPassword.text;
         if (username && password) {
-            screen.state = "loggingIn";
+            application.state = "loggingIn";
             Storage.setUser(username, password);
-            Gowalla.getFriendsActivity(screen.callback, username, password);
+            Gowalla.getFriendsActivity(application.callback, username, password);
             //screen.state = "loggedIn";
         }
     }

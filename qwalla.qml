@@ -62,7 +62,7 @@ Item {
 
             Qwalla.LoginView {
                 id: loginView
-                x: - application.width
+                visible: application.state == "login"
             }
         }
         Qwalla.Loading {
@@ -77,11 +77,11 @@ Item {
         State {
             name: "login"
             PropertyChanges { target: loginView; x: 0; focus: true }
-        },
+        },/*
         State {
             name: "loggingIn"
             PropertyChanges { target: loginView; x: - width; focus: false }
-        },
+        },*/
         /*State {
             name: "loggedIn"
             PropertyChanges { target: userListView; x: 0; focus: true }
@@ -98,7 +98,9 @@ Item {
         }
 
     ]
+    /*
     transitions: [
         Transition { PropertyAnimation { properties: "x,opacity"; duration: 500; easing.type: Easing.InOutQuad } }
     ]
+    */
 }
