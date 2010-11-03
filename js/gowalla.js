@@ -3,11 +3,6 @@
 var API_BASE_URL = "http://api.gowalla.com";
 var API_KEY = "742292fb289449e5a3a32edba8ab1a0c";
 
-function _parseJSON(data)
-{
-    return eval("(" + data + ")");
-}
-
 function getFriendsActivity(callback, username, password)
 {
     httpRequest("GET", "/users/" + username + "/activity/friends", callback, username, password);
@@ -30,7 +25,7 @@ function httpRequest(method, path, callback, username, password)
     req.onreadystatechange = function() {
         if (req.readyState == XMLHttpRequest.DONE) {
             //console.log(req.responseText)
-            callback(_parseJSON(req.responseText));
+            callback(JSON.parse(req.responseText));
         }
     }
     req.send();

@@ -1,14 +1,20 @@
 import Qt 4.7
+import QtMobility.location 1.1
+
 import "QwallaCore" 1.0 as Qwalla
 import "js/gowalla.js" as Gowalla
 import "js/storage.js" as Storage
 
-Item {
+Rectangle {
+    id: application; width: 360; height: 640;
+    state: "start"
+
     property string username
     property string password
 
-    id: application; width: 360; height: 640;
-    state: "start"
+    // New York is a nice place
+    property double lat: 37.0625
+    property double lon: -95.677068
 
     function callback(data) {
         var activity;
@@ -28,15 +34,28 @@ Item {
     function startApp() {
         Storage.initialize();
         var user = Storage.getUser();
-        if (!user)  {
+        if (user.username == "")  {
             application.state = "login";
         } else {
             application.username = user.username
             application.password = user.password
             application.state = "loggingIn";
-            //Gowalla.listNearbySpots(screen.spotsCallback, "60.158568", "24.742734", "100");
             Gowalla.getFriendsActivity(application.callback, user.username, user.password);
         }
+    }
+
+    function getPosition() {
+        if (positionSource.positioninMethod == PositionSource.NoPositioningMethod) {
+            console.log("No positioning method available!");
+            return { "lat": application.lat, "lon": application.lon }
+        } else
+            return { "lat": positionSource.position.latitude, "lon": positionSource.longitude }
+    }
+
+    PositionSource {
+        id: positionSource
+        active: true
+        updateInterval: 1000
     }
 
     Rectangle {

@@ -49,10 +49,10 @@ Component {
                 }
             }
         }
-        ListView.onAdd: SequentialAnimation {
+        ListView.onAdd: ScriptAction{ script: console.log("adding to list"); } /*SequentialAnimation {
             PropertyAction { target: userListItem; property: "height"; value: 0 }
             NumberAnimation { target: userListItem; property: "height"; to: 93; duration: 1000; easing.type: Easing.InOutQuad }
-        }
+        }*/
         MouseArea {
             anchors.fill: parent
             onClicked: console.log("Clicked element! " + user.url);

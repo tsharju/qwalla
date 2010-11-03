@@ -18,7 +18,8 @@ Rectangle {
     function spotsClicked() {
         if (application.state != "spots") {
             application.state = "loading"
-            Gowalla.listNearbySpots(application.spotsCallback, "60.158568", "24.742734", "100");
+            var position = application.getPosition();
+            Gowalla.listNearbySpots(application.spotsCallback, position.lat, position.lon, "100");
             application.state = "spots"
         }
     }

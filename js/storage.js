@@ -1,9 +1,12 @@
+.pragma library
+
 var db = openDatabaseSync("qwalla", "1.0", "Qwalla Database", 1000000);
 
 function initialize()
 {
     db.transaction(
         function(tx) {
+            //tx.executeSql("DROP TABLE IF EXISTS User");
             tx.executeSql("CREATE TABLE IF NOT EXISTS User(username TEXT, password TEXT)");
         }
     );
@@ -11,8 +14,8 @@ function initialize()
 
 function getUser()
 {
-    var username;
-    var password;
+    var username = "";
+    var password = "";
     db.transaction(
         function(tx) {
             var result = tx.executeSql("SELECT * FROM User");
@@ -30,6 +33,14 @@ function setUser(username, password)
     db.transaction(
         function(tx) {
             var result = tx.executeSql("INSERT INTO User VALUES ('" + username + "', '" + password + "')");
+        }
+    );
+}
+
+function clearUser() {
+    db.transaction(
+        function(tx) {
+            var result = tx.executeSql("DROP TABLE User");
         }
     );
 }

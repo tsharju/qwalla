@@ -1,5 +1,7 @@
 import Qt 4.7
 
+import "../js/geo.js" as Geo
+
 Component {
     id: spotsListDelegate
 
@@ -10,6 +12,14 @@ Component {
         anchors.horizontalCenter: parent.horizontalCenter
         height: 60
         radius: 5
+
+        function getDistance(lat, lon) {
+            var position = application.getPosition();
+            console.log("POSITION: " + position.lat + " " + position.lon);
+            var p1 = new Geo.LatLon(position.lat, position.lon);
+            var p2 = new Geo.LatLon(lat, lon);
+            return p1.distanceTo(p2);
+        }
 
         Row {
             spacing: 10
@@ -32,7 +42,7 @@ Component {
                 spacing: 3
                 y: 5
                 Text { text: name; font { bold: true; pixelSize: 18 } }
-                //Text { text: distance }
+                Text { text: spotsListItem.getDistance(lat, lng); }
                 /*Row {
                     spacing: 5
                     Image {
