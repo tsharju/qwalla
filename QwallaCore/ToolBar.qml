@@ -16,15 +16,16 @@ Rectangle {
     z: 100
 
     function spotsClicked() {
-        if (screen.state != "spots") {
-            screen.state = "spots"
-            Gowalla.listNearbySpots(screen.spotsCallback, "60.158568", "24.742734", "100");
+        if (application.state != "spots") {
+            application.state = "loading"
+            Gowalla.listNearbySpots(application.spotsCallback, "60.158568", "24.742734", "100");
+            application.state = "spots"
         }
     }
 
     function activityClicked() {
-        if (screen.state != "activity") {
-            screen.state = "activity"
+        if (application.state != "activity") {
+            application.state = "activity"
             //Gowalla.getFriendsActivity(screen.callback, screen.username, screen.password);
         }
     }

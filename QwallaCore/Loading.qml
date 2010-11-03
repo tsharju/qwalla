@@ -10,28 +10,29 @@ Rectangle {
     radius: 10
     color: "#2e2e2e"
     opacity: 0.8
+    z: 100
     Rectangle {
         width: 0.5 * parent.width
         height: 0.5 * parent.height
         anchors.centerIn: parent
         color: "transparent"
-    Column {
-        anchors.fill: parent
-        spacing: 10
-    Image {
-        anchors.horizontalCenter: parent.horizontalCenter
-        source: "../images/loading.png"
-        NumberAnimation on rotation {
-            from: 0; to: 360; running: loading.visible == true; loops: Animation.Infinite; duration: 900
+        Column {
+            anchors.fill: parent
+            spacing: 10
+            Image {
+                anchors.horizontalCenter: parent.horizontalCenter
+                source: "../images/loading.png"
+                NumberAnimation on rotation {
+                    from: 0; to: 360; running: loading.visible == true; loops: Animation.Infinite; duration: 900
+                }
+            }
+            Text {
+                text: loading.text;
+                color: "#ffffff";
+                font.pixelSize: 18;
+                font.bold: true;
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
     }
-    Text {
-        text: loading.text;
-        color: "#ffffff";
-        font.pixelSize: 18;
-        font.bold: true;
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
-    }
-}
 }

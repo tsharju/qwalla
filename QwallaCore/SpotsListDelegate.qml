@@ -8,7 +8,7 @@ Component {
         color: "#eeddcc"
         width: parent.width - 10
         anchors.horizontalCenter: parent.horizontalCenter
-        height: 70
+        height: 60
         radius: 5
 
         Row {
