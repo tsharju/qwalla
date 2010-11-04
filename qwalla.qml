@@ -12,9 +12,8 @@ Rectangle {
     property string username
     property string password
 
-    // New York is a nice place
-    property double lat: 37.0625
-    property double lon: -95.677068
+    property double lat: 62.593341
+    property double lon: 27.575684
 
     function callback(data) {
         var activity;
@@ -44,12 +43,12 @@ Rectangle {
         }
     }
 
-    function getPosition() {
+    function getPosition() {/*
         if (positionSource.positioninMethod == PositionSource.NoPositioningMethod) {
-            console.log("No positioning method available!");
             return { "lat": application.lat, "lon": application.lon }
         } else
-            return { "lat": positionSource.position.latitude, "lon": positionSource.longitude }
+            return { "lat": positionSource.position.latitude, "lon": positionSource.longitude }*/
+        return { "lat": application.lat, "lon": application.lon }
     }
 
     PositionSource {
@@ -82,6 +81,11 @@ Rectangle {
             Qwalla.LoginView {
                 id: loginView
                 visible: application.state == "login"
+            }
+
+            Qwalla.MapView {
+                id: mapView
+                visible: application.state == "map"
             }
         }
         Qwalla.Loading {

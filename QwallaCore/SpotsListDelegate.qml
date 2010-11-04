@@ -15,10 +15,11 @@ Component {
 
         function getDistance(lat, lon) {
             var position = application.getPosition();
-            console.log("POSITION: " + position.lat + " " + position.lon);
             var p1 = new Geo.LatLon(position.lat, position.lon);
             var p2 = new Geo.LatLon(lat, lon);
-            return p1.distanceTo(p2);
+            var distance = Math.round(p1.distanceTo(p2) * 10) / 10;
+            var brng = p1.bearingTo(p2);
+            return "Distance: " + distance + "km";
         }
 
         Row {

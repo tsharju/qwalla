@@ -19,7 +19,7 @@ Rectangle {
         if (application.state != "spots") {
             application.state = "loading"
             var position = application.getPosition();
-            Gowalla.listNearbySpots(application.spotsCallback, position.lat, position.lon, "100");
+            Gowalla.listNearbySpots(application.spotsCallback, position.lat, position.lon, 50);
             application.state = "spots"
         }
     }
@@ -65,6 +65,13 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: console.log("Passport clicked!")
+            }
+        }
+        Text {
+            text: "Map"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: application.state = "map"
             }
         }
     }
